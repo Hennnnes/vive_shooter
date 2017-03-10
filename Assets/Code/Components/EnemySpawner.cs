@@ -24,10 +24,62 @@ namespace ViveDatabase {
     [uFrame.Attributes.uFrameIdentifier("2156f58d-2de4-4db9-971e-a067cbe9646f")]
     public partial class EnemySpawner : uFrame.ECS.Components.EcsComponent {
         
+        [UnityEngine.SerializeField()]
+        private Vector3 _position;
+        
+        [UnityEngine.SerializeField()]
+        private GameObject _prefab;
+        
+        private Subject<PropertyChangedEvent<Vector3>> _positionObservable;
+        
+        private PropertyChangedEvent<Vector3> _positionEvent;
+        
+        private Subject<PropertyChangedEvent<GameObject>> _prefabObservable;
+        
+        private PropertyChangedEvent<GameObject> _prefabEvent;
+        
         public override int ComponentId {
             get {
                 return 9;
             }
+        }
+        
+        public IObservable<PropertyChangedEvent<Vector3>> positionObservable {
+            get {
+                return _positionObservable ?? (_positionObservable = new Subject<PropertyChangedEvent<Vector3>>());
+            }
+        }
+        
+        public IObservable<PropertyChangedEvent<GameObject>> prefabObservable {
+            get {
+                return _prefabObservable ?? (_prefabObservable = new Subject<PropertyChangedEvent<GameObject>>());
+            }
+        }
+        
+        public Vector3 position {
+            get {
+                return _position;
+            }
+            set {
+                Setposition(value);
+            }
+        }
+        
+        public GameObject prefab {
+            get {
+                return _prefab;
+            }
+            set {
+                Setprefab(value);
+            }
+        }
+        
+        public virtual void Setposition(Vector3 value) {
+            SetProperty(ref _position, value, ref _positionEvent, _positionObservable);
+        }
+        
+        public virtual void Setprefab(GameObject value) {
+            SetProperty(ref _prefab, value, ref _prefabEvent, _prefabObservable);
         }
     }
 }

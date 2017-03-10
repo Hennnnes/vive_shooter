@@ -1,8 +1,0 @@
-{
-	"Identifier":"5806ebce-c2f2-4a89-a5a3-d2037c548e42"	, 
-	"Time":"3/10/2017 3:55:31 PM"	, 
-	"Group":155531	, 
-	"DataRecordId":"fbf0ad29-8b16-4b92-8353-39f1e33d6e12"	, 
-	"Type":2	, 
-	"RecordType":"uFrame.ECS.Editor.HandlerNode, Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
-	"Data":"{\r\n\t\"CodeHandler\":false\t, \r\n\t\"Custom\":false\t, \r\n\t\"MetaType\":\"uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher\"\t, \r\n\t\"VariableCount\":0\t, \r\n\t\"VariableName\":\"HandlerNode11\"\t, \r\n\t\"Name\":\"EnemySpawnSystemOnTriggerEnter\"\t, \r\n\t\"Order\":0\t, \r\n\t\"GraphId\":\"e3f49127-f1bf-4a8f-8147-d3e497e46059\"\t, \r\n\t\"Identifier\":\"fbf0ad29-8b16-4b92-8353-39f1e33d6e12\"\t, \r\n\t\"Expanded\":false}\r\n"}
