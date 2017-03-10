@@ -1,8 +1,0 @@
-{
-	"Identifier":"162e0462-54e6-4eaf-9991-6b159f236860"	, 
-	"Time":"3/10/2017 3:33:43 PM"	, 
-	"Group":153343	, 
-	"DataRecordId":"28e60fe7-391b-4a81-988b-3cdc64fb86b0"	, 
-	"Type":0	, 
-	"RecordType":"uFrame.ECS.Editor.EcsWorkspace, Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
-	"Data":"{\r\n\t\"Identifier\":\"28e60fe7-391b-4a81-988b-3cdc64fb86b0\"\t, \r\n\t\"Name\":\"ViveWorkspace\"\t, \r\n\t\"Expanded\":false}\r\n"}
