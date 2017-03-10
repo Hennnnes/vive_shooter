@@ -30,6 +30,13 @@ static
         
         #region 
 static
+        public uFrame.ECS.APIs.IEcsComponentManagerOf<EnemySpawner> EnemySpawnerManager(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<EnemySpawner>();
+        }
+        #endregion
+        
+        #region 
+static
         public uFrame.ECS.APIs.IEcsComponentManagerOf<WandLeft> WandLeftManager(this uFrame.ECS.APIs.IEcsSystem system) {
             return system.ComponentSystem.RegisterComponent<WandLeft>();
         }
@@ -51,6 +58,20 @@ static
         
         #region 
 static
+        public uFrame.ECS.APIs.IEcsComponentManagerOf<Enemy> EnemyManager(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Enemy>();
+        }
+        #endregion
+        
+        #region 
+static
+        public uFrame.ECS.APIs.IEcsComponentManagerOf<Weapon> WeaponManager(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Weapon>();
+        }
+        #endregion
+        
+        #region 
+static
         public uFrame.ECS.APIs.IEcsComponentManagerOf<Player> PlayerManager(this uFrame.ECS.APIs.IEcsSystem system) {
             return system.ComponentSystem.RegisterComponent<Player>();
         }
@@ -65,29 +86,15 @@ static
         
         #region 
 static
-        public uFrame.ECS.APIs.IEcsComponentManagerOf<Weapon> WeaponManager(this uFrame.ECS.APIs.IEcsSystem system) {
-            return system.ComponentSystem.RegisterComponent<Weapon>();
-        }
-        #endregion
-        
-        #region 
-static
-        public uFrame.ECS.APIs.IEcsComponentManagerOf<EnemySpawner> EnemySpawnerManager(this uFrame.ECS.APIs.IEcsSystem system) {
-            return system.ComponentSystem.RegisterComponent<EnemySpawner>();
-        }
-        #endregion
-        
-        #region 
-static
-        public uFrame.ECS.APIs.IEcsComponentManagerOf<Enemy> EnemyManager(this uFrame.ECS.APIs.IEcsSystem system) {
-            return system.ComponentSystem.RegisterComponent<Enemy>();
-        }
-        #endregion
-        
-        #region 
-static
         public List<Menu> MenuComponents(this uFrame.ECS.APIs.IEcsSystem system) {
             return system.ComponentSystem.RegisterComponent<Menu>().Components;
+        }
+        #endregion
+        
+        #region 
+static
+        public List<EnemySpawner> EnemySpawnerComponents(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<EnemySpawner>().Components;
         }
         #endregion
         
@@ -114,15 +121,8 @@ static
         
         #region 
 static
-        public List<Player> PlayerComponents(this uFrame.ECS.APIs.IEcsSystem system) {
-            return system.ComponentSystem.RegisterComponent<Player>().Components;
-        }
-        #endregion
-        
-        #region 
-static
-        public List<Wands> WandsComponents(this uFrame.ECS.APIs.IEcsSystem system) {
-            return system.ComponentSystem.RegisterComponent<Wands>().Components;
+        public List<Enemy> EnemyComponents(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Enemy>().Components;
         }
         #endregion
         
@@ -135,15 +135,15 @@ static
         
         #region 
 static
-        public List<EnemySpawner> EnemySpawnerComponents(this uFrame.ECS.APIs.IEcsSystem system) {
-            return system.ComponentSystem.RegisterComponent<EnemySpawner>().Components;
+        public List<Player> PlayerComponents(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Player>().Components;
         }
         #endregion
         
         #region 
 static
-        public List<Enemy> EnemyComponents(this uFrame.ECS.APIs.IEcsSystem system) {
-            return system.ComponentSystem.RegisterComponent<Enemy>().Components;
+        public List<Wands> WandsComponents(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Wands>().Components;
         }
         #endregion
     }

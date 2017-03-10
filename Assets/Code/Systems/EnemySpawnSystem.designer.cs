@@ -26,11 +26,11 @@ namespace ViveDatabase {
         
         private IEcsComponentManagerOf<Wands> _WandsManager;
         
+        private IEcsComponentManagerOf<EnemySpawner> _EnemySpawnerManager;
+        
         private IEcsComponentManagerOf<Menu> _MenuManager;
         
         private IEcsComponentManagerOf<WandLeft> _WandLeftManager;
-        
-        private IEcsComponentManagerOf<EnemySpawner> _EnemySpawnerManager;
         
         private IEcsComponentManagerOf<bullet> _bulletManager;
         
@@ -51,6 +51,15 @@ namespace ViveDatabase {
             }
         }
         
+        public IEcsComponentManagerOf<EnemySpawner> EnemySpawnerManager {
+            get {
+                return _EnemySpawnerManager;
+            }
+            set {
+                _EnemySpawnerManager = value;
+            }
+        }
+        
         public IEcsComponentManagerOf<Menu> MenuManager {
             get {
                 return _MenuManager;
@@ -66,15 +75,6 @@ namespace ViveDatabase {
             }
             set {
                 _WandLeftManager = value;
-            }
-        }
-        
-        public IEcsComponentManagerOf<EnemySpawner> EnemySpawnerManager {
-            get {
-                return _EnemySpawnerManager;
-            }
-            set {
-                _EnemySpawnerManager = value;
             }
         }
         
@@ -126,33 +126,18 @@ namespace ViveDatabase {
         public override void Setup() {
             base.Setup();
             WandsManager = ComponentSystem.RegisterComponent<Wands>(1);
+            EnemySpawnerManager = ComponentSystem.RegisterComponent<EnemySpawner>(9);
             MenuManager = ComponentSystem.RegisterComponent<Menu>(7);
             WandLeftManager = ComponentSystem.RegisterComponent<WandLeft>(2);
-            EnemySpawnerManager = ComponentSystem.RegisterComponent<EnemySpawner>(9);
             bulletManager = ComponentSystem.RegisterComponent<bullet>(4);
             EnemyManager = ComponentSystem.RegisterComponent<Enemy>(10);
             WeaponManager = ComponentSystem.RegisterComponent<Weapon>(8);
             WandRightManager = ComponentSystem.RegisterComponent<WandRight>(3);
             PlayerManager = ComponentSystem.RegisterComponent<Player>(5);
-            this.OnEvent<uFrame.Kernel.KernelLoadedEvent>().Subscribe(_=>{ EnemySpawnSystemKernelLoadedFilter(_); }).DisposeWith(this);
             this.OnEvent<uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher>().Subscribe(_=>{ EnemySpawnSystemOnTriggerEnterFilter(_); }).DisposeWith(this);
-            this.OnEvent<uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher>().Subscribe(_=>{ EnemySpawnSystemOnTriggerEnterWeaponFilter(_); }).DisposeWith(this);
             this.OnEvent<ViveDatabase.MenuEvent>().Subscribe(_=>{ EnemySpawnSystemMenuEventFilter(_); }).DisposeWith(this);
-        }
-        
-        protected virtual void EnemySpawnSystemKernelLoadedHandler(uFrame.Kernel.KernelLoadedEvent data, EnemySpawner group) {
-        }
-        
-        protected void EnemySpawnSystemKernelLoadedFilter(uFrame.Kernel.KernelLoadedEvent data) {
-            var EnemySpawnerItems = EnemySpawnerManager.Components;
-            for (var EnemySpawnerIndex = 0
-            ; EnemySpawnerIndex < EnemySpawnerItems.Count; EnemySpawnerIndex++
-            ) {
-                if (!EnemySpawnerItems[EnemySpawnerIndex].Enabled) {
-                    continue;
-                }
-                this.EnemySpawnSystemKernelLoadedHandler(data, EnemySpawnerItems[EnemySpawnerIndex]);
-            }
+            this.OnEvent<uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher>().Subscribe(_=>{ EnemySpawnSystemOnTriggerEnterWeaponFilter(_); }).DisposeWith(this);
+            this.OnEvent<uFrame.Kernel.KernelLoadedEvent>().Subscribe(_=>{ EnemySpawnSystemKernelLoadedFilter(_); }).DisposeWith(this);
         }
         
         protected virtual void EnemySpawnSystemOnTriggerEnterHandler(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data, bullet collider, Enemy source) {
@@ -195,6 +180,13 @@ namespace ViveDatabase {
             EnemySpawnSystemFixedUpdateFilter();
         }
         
+        protected virtual void EnemySpawnSystemMenuEventHandler(ViveDatabase.MenuEvent data) {
+        }
+        
+        protected void EnemySpawnSystemMenuEventFilter(ViveDatabase.MenuEvent data) {
+            this.EnemySpawnSystemMenuEventHandler(data);
+        }
+        
         protected virtual void EnemySpawnSystemOnTriggerEnterWeaponHandler(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data, Weapon collider, WandRight source) {
         }
         
@@ -216,11 +208,19 @@ namespace ViveDatabase {
             this.EnemySpawnSystemOnTriggerEnterWeaponHandler(data, ColliderWeapon, SourceWandRight);
         }
         
-        protected virtual void EnemySpawnSystemMenuEventHandler(ViveDatabase.MenuEvent data) {
+        protected virtual void EnemySpawnSystemKernelLoadedHandler(uFrame.Kernel.KernelLoadedEvent data, EnemySpawner group) {
         }
         
-        protected void EnemySpawnSystemMenuEventFilter(ViveDatabase.MenuEvent data) {
-            this.EnemySpawnSystemMenuEventHandler(data);
+        protected void EnemySpawnSystemKernelLoadedFilter(uFrame.Kernel.KernelLoadedEvent data) {
+            var EnemySpawnerItems = EnemySpawnerManager.Components;
+            for (var EnemySpawnerIndex = 0
+            ; EnemySpawnerIndex < EnemySpawnerItems.Count; EnemySpawnerIndex++
+            ) {
+                if (!EnemySpawnerItems[EnemySpawnerIndex].Enabled) {
+                    continue;
+                }
+                this.EnemySpawnSystemKernelLoadedHandler(data, EnemySpawnerItems[EnemySpawnerIndex]);
+            }
         }
     }
     

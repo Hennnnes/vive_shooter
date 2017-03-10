@@ -23,9 +23,9 @@ namespace ViveDatabase {
         
         public override void Load() {
             EcsSystem system = null;
-            system = this.AddSystem<InputSystem>();
-            system = this.AddSystem<EnemySpawnSystem>();
             system = this.AddSystem<EnemySystem>();
+            system = this.AddSystem<EnemySpawnSystem>();
+            system = this.AddSystem<InputSystem>();
         }
     }
 }

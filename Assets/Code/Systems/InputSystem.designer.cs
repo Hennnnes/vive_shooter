@@ -26,11 +26,11 @@ namespace ViveDatabase {
         
         private IEcsComponentManagerOf<Wands> _WandsManager;
         
+        private IEcsComponentManagerOf<EnemySpawner> _EnemySpawnerManager;
+        
         private IEcsComponentManagerOf<Menu> _MenuManager;
         
         private IEcsComponentManagerOf<WandLeft> _WandLeftManager;
-        
-        private IEcsComponentManagerOf<EnemySpawner> _EnemySpawnerManager;
         
         private IEcsComponentManagerOf<bullet> _bulletManager;
         
@@ -51,6 +51,15 @@ namespace ViveDatabase {
             }
         }
         
+        public IEcsComponentManagerOf<EnemySpawner> EnemySpawnerManager {
+            get {
+                return _EnemySpawnerManager;
+            }
+            set {
+                _EnemySpawnerManager = value;
+            }
+        }
+        
         public IEcsComponentManagerOf<Menu> MenuManager {
             get {
                 return _MenuManager;
@@ -66,15 +75,6 @@ namespace ViveDatabase {
             }
             set {
                 _WandLeftManager = value;
-            }
-        }
-        
-        public IEcsComponentManagerOf<EnemySpawner> EnemySpawnerManager {
-            get {
-                return _EnemySpawnerManager;
-            }
-            set {
-                _EnemySpawnerManager = value;
             }
         }
         
@@ -126,9 +126,9 @@ namespace ViveDatabase {
         public override void Setup() {
             base.Setup();
             WandsManager = ComponentSystem.RegisterComponent<Wands>(1);
+            EnemySpawnerManager = ComponentSystem.RegisterComponent<EnemySpawner>(9);
             MenuManager = ComponentSystem.RegisterComponent<Menu>(7);
             WandLeftManager = ComponentSystem.RegisterComponent<WandLeft>(2);
-            EnemySpawnerManager = ComponentSystem.RegisterComponent<EnemySpawner>(9);
             bulletManager = ComponentSystem.RegisterComponent<bullet>(4);
             EnemyManager = ComponentSystem.RegisterComponent<Enemy>(10);
             WeaponManager = ComponentSystem.RegisterComponent<Weapon>(8);
