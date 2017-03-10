@@ -23,6 +23,13 @@ static
         
         #region 
 static
+        public uFrame.ECS.APIs.IEcsComponentManagerOf<Menu> MenuManager(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Menu>();
+        }
+        #endregion
+        
+        #region 
+static
         public uFrame.ECS.APIs.IEcsComponentManagerOf<WandLeft> WandLeftManager(this uFrame.ECS.APIs.IEcsSystem system) {
             return system.ComponentSystem.RegisterComponent<WandLeft>();
         }
@@ -58,8 +65,8 @@ static
         
         #region 
 static
-        public uFrame.ECS.APIs.IEcsComponentManagerOf<Menu> MenuManager(this uFrame.ECS.APIs.IEcsSystem system) {
-            return system.ComponentSystem.RegisterComponent<Menu>();
+        public List<Menu> MenuComponents(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Menu>().Components;
         }
         #endregion
         
@@ -95,13 +102,6 @@ static
 static
         public List<Wands> WandsComponents(this uFrame.ECS.APIs.IEcsSystem system) {
             return system.ComponentSystem.RegisterComponent<Wands>().Components;
-        }
-        #endregion
-        
-        #region 
-static
-        public List<Menu> MenuComponents(this uFrame.ECS.APIs.IEcsSystem system) {
-            return system.ComponentSystem.RegisterComponent<Menu>().Components;
         }
         #endregion
     }

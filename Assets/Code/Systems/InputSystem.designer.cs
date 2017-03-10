@@ -26,6 +26,8 @@ namespace ViveDatabase {
         
         private IEcsComponentManagerOf<Wands> _WandsManager;
         
+        private IEcsComponentManagerOf<Menu> _MenuManager;
+        
         private IEcsComponentManagerOf<WandLeft> _WandLeftManager;
         
         private IEcsComponentManagerOf<bullet> _bulletManager;
@@ -34,14 +36,21 @@ namespace ViveDatabase {
         
         private IEcsComponentManagerOf<Player> _PlayerManager;
         
-        private IEcsComponentManagerOf<Menu> _MenuManager;
-        
         public IEcsComponentManagerOf<Wands> WandsManager {
             get {
                 return _WandsManager;
             }
             set {
                 _WandsManager = value;
+            }
+        }
+        
+        public IEcsComponentManagerOf<Menu> MenuManager {
+            get {
+                return _MenuManager;
+            }
+            set {
+                _MenuManager = value;
             }
         }
         
@@ -81,26 +90,19 @@ namespace ViveDatabase {
             }
         }
         
-        public IEcsComponentManagerOf<Menu> MenuManager {
-            get {
-                return _MenuManager;
-            }
-            set {
-                _MenuManager = value;
-            }
-        }
-        
         public override void Setup() {
             base.Setup();
             WandsManager = ComponentSystem.RegisterComponent<Wands>(1);
+            MenuManager = ComponentSystem.RegisterComponent<Menu>(7);
             WandLeftManager = ComponentSystem.RegisterComponent<WandLeft>(2);
             bulletManager = ComponentSystem.RegisterComponent<bullet>(4);
             WandRightManager = ComponentSystem.RegisterComponent<WandRight>(3);
             PlayerManager = ComponentSystem.RegisterComponent<Player>(5);
-            MenuManager = ComponentSystem.RegisterComponent<Menu>(7);
             this.OnEvent<uFrame.Kernel.KernelLoadedEvent>().Subscribe(_=>{ InputSystemKernelLoadedFilter(_); }).DisposeWith(this);
             this.OnEvent<ViveDatabase.ShootEvent>().Subscribe(_=>{ InputSystemShootEventFilter(_); }).DisposeWith(this);
             this.OnEvent<ViveDatabase.TeleportEvent>().Subscribe(_=>{ InputSystemTeleportEventFilter(_); }).DisposeWith(this);
+            this.OnEvent<ViveDatabase.MenuEvent>().Subscribe(_=>{ InputSystemMenuEventFilter(_); }).DisposeWith(this);
+            this.OnEvent<uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher>().Subscribe(_=>{ InputSystemOnTriggerEnterFilter(_); }).DisposeWith(this);
         }
         
         protected virtual void InputSystemKernelLoadedHandler(uFrame.Kernel.KernelLoadedEvent data, Wands group) {
@@ -165,6 +167,42 @@ namespace ViveDatabase {
                 }
                 this.InputSystemTeleportEventHandler(data, WandsItems[WandsIndex]);
             }
+        }
+        
+        protected virtual void InputSystemMenuEventHandler(ViveDatabase.MenuEvent data, Wands group) {
+        }
+        
+        protected void InputSystemMenuEventFilter(ViveDatabase.MenuEvent data) {
+            var WandsItems = WandsManager.Components;
+            for (var WandsIndex = 0
+            ; WandsIndex < WandsItems.Count; WandsIndex++
+            ) {
+                if (!WandsItems[WandsIndex].Enabled) {
+                    continue;
+                }
+                this.InputSystemMenuEventHandler(data, WandsItems[WandsIndex]);
+            }
+        }
+        
+        protected virtual void InputSystemOnTriggerEnterHandler(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data, Menu collider, WandLeft source) {
+        }
+        
+        protected void InputSystemOnTriggerEnterFilter(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data) {
+            var ColliderMenu = MenuManager[data.ColliderId];
+            if (ColliderMenu == null) {
+                return;
+            }
+            if (!ColliderMenu.Enabled) {
+                return;
+            }
+            var SourceWandLeft = WandLeftManager[data.EntityId];
+            if (SourceWandLeft == null) {
+                return;
+            }
+            if (!SourceWandLeft.Enabled) {
+                return;
+            }
+            this.InputSystemOnTriggerEnterHandler(data, ColliderMenu, SourceWandLeft);
         }
     }
     

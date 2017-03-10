@@ -1,0 +1,8 @@
+{
+	"Identifier":"3087b1aa-3fd3-43c2-974e-8f1c4e176508"	, 
+	"Time":"3/10/2017 3:50:54 PM"	, 
+	"Group":155054	, 
+	"DataRecordId":"bcc6999c-80af-4ec5-9d22-d3a573c42ad2"	, 
+	"Type":2	, 
+	"RecordType":"uFrame.ECS.Editor.HandlerInValue, Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
+	"Data":"{\r\n\t\"Identifier\":\"bcc6999c-80af-4ec5-9d22-d3a573c42ad2\"\t, \r\n\t\"NodeId\":\"14892256-2dc4-4efd-8d2d-868fe4878e46\"\t, \r\n\t\"ItemId\":\"14892256-2dc4-4efd-8d2d-868fe4878e46:Group\"\t, \r\n\t\"ValueId\":\"2f8e5ca3-0b03-4159-9fa7-a2ef53c03707\"}\r\n"}
