@@ -1,0 +1,11 @@
+{
+	"CodeHandler":false	, 
+	"Custom":false	, 
+	"MetaType":"uFrame.Kernel.KernelLoadedEvent"	, 
+	"VariableCount":0	, 
+	"VariableName":"HandlerNode1"	, 
+	"Name":"InputSystemKernelLoaded"	, 
+	"Order":0	, 
+	"GraphId":"e3f49127-f1bf-4a8f-8147-d3e497e46059"	, 
+	"Identifier":"fdbff81f-a2d9-489b-b9a1-36f05feed635"	, 
+	"Expanded":false}

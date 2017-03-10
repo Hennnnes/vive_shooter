@@ -15,6 +15,8 @@ namespace ViveDatabase {
     using System.Linq;
     using uFrame.ECS;
     using UniRx;
+    using UnityEngine;
+    using ViveDatabase;
     
     
     [uFrame.Attributes.EventId(4)]
