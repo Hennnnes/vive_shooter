@@ -1,8 +1,0 @@
-{
-	"Identifier":"6bc94a3c-2cb4-4b8e-8aa8-68d697fe349d"	, 
-	"Time":"3/10/2017 3:55:12 PM"	, 
-	"Group":155512	, 
-	"DataRecordId":"0944ec41-9898-40fb-9635-cf52f9d99b40"	, 
-	"Type":0	, 
-	"RecordType":"uFrame.ECS.Editor.HandlerNode, Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
-	"Data":"{\r\n\t\"CodeHandler\":false\t, \r\n\t\"Custom\":false\t, \r\n\t\"MetaType\":\"uFrame.ECS.APIs.ISystemFixedUpdate\"\t, \r\n\t\"VariableCount\":0\t, \r\n\t\"VariableName\":\"HandlerNode10\"\t, \r\n\t\"Name\":\"EnemySpawnSystemFixedUpdate\"\t, \r\n\t\"Order\":0\t, \r\n\t\"GraphId\":\"e3f49127-f1bf-4a8f-8147-d3e497e46059\"\t, \r\n\t\"Identifier\":\"0944ec41-9898-40fb-9635-cf52f9d99b40\"\t, \r\n\t\"Expanded\":false}\r\n"}

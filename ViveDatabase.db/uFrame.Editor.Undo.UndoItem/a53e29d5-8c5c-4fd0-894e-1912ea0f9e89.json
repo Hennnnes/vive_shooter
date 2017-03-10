@@ -1,0 +1,8 @@
+{
+	"Identifier":"a53e29d5-8c5c-4fd0-894e-1912ea0f9e89"	, 
+	"Time":"3/10/2017 4:30:33 PM"	, 
+	"Group":163033	, 
+	"DataRecordId":"488fecb5-2fa1-47d2-bfce-8a35824bf874"	, 
+	"Type":0	, 
+	"RecordType":"uFrame.ECS.Editor.HandlerNode, Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
+	"Data":"{\r\n\t\"CodeHandler\":false\t, \r\n\t\"Custom\":false\t, \r\n\t\"MetaType\":\"uFrame.Kernel.KernelLoadedEvent\"\t, \r\n\t\"VariableCount\":0\t, \r\n\t\"VariableName\":\"HandlerNode14\"\t, \r\n\t\"Name\":\"EnemySystemKernelLoaded\"\t, \r\n\t\"Order\":0\t, \r\n\t\"GraphId\":\"e3f49127-f1bf-4a8f-8147-d3e497e46059\"\t, \r\n\t\"Identifier\":\"488fecb5-2fa1-47d2-bfce-8a35824bf874\"\t, \r\n\t\"Expanded\":false}\r\n"}

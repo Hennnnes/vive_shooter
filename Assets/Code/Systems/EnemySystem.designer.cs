@@ -22,7 +22,7 @@ namespace ViveDatabase {
     using ViveDatabase;
     
     
-    public partial class EnemySystemBase : uFrame.ECS.Systems.EcsSystem {
+    public partial class EnemySystemBase : uFrame.ECS.Systems.EcsSystem, uFrame.ECS.APIs.ISystemFixedUpdate {
         
         private IEcsComponentManagerOf<Wands> _WandsManager;
         
@@ -134,6 +134,63 @@ namespace ViveDatabase {
             WeaponManager = ComponentSystem.RegisterComponent<Weapon>(8);
             WandRightManager = ComponentSystem.RegisterComponent<WandRight>(3);
             PlayerManager = ComponentSystem.RegisterComponent<Player>(5);
+            this.OnEvent<uFrame.Kernel.KernelLoadedEvent>().Subscribe(_=>{ EnemySystemKernelLoadedFilter(_); }).DisposeWith(this);
+            this.OnEvent<uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher>().Subscribe(_=>{ EnemySystemOnTriggerEnterFilter(_); }).DisposeWith(this);
+        }
+        
+        protected virtual void EnemySystemFixedUpdateHandler(Enemy group) {
+        }
+        
+        protected void EnemySystemFixedUpdateFilter() {
+            var EnemyItems = EnemyManager.Components;
+            for (var EnemyIndex = 0
+            ; EnemyIndex < EnemyItems.Count; EnemyIndex++
+            ) {
+                if (!EnemyItems[EnemyIndex].Enabled) {
+                    continue;
+                }
+                this.EnemySystemFixedUpdateHandler(EnemyItems[EnemyIndex]);
+            }
+        }
+        
+        public virtual void SystemFixedUpdate() {
+            EnemySystemFixedUpdateFilter();
+        }
+        
+        protected virtual void EnemySystemKernelLoadedHandler(uFrame.Kernel.KernelLoadedEvent data, EnemySpawner group) {
+        }
+        
+        protected void EnemySystemKernelLoadedFilter(uFrame.Kernel.KernelLoadedEvent data) {
+            var EnemySpawnerItems = EnemySpawnerManager.Components;
+            for (var EnemySpawnerIndex = 0
+            ; EnemySpawnerIndex < EnemySpawnerItems.Count; EnemySpawnerIndex++
+            ) {
+                if (!EnemySpawnerItems[EnemySpawnerIndex].Enabled) {
+                    continue;
+                }
+                this.EnemySystemKernelLoadedHandler(data, EnemySpawnerItems[EnemySpawnerIndex]);
+            }
+        }
+        
+        protected virtual void EnemySystemOnTriggerEnterHandler(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data, Enemy collider, Player source) {
+        }
+        
+        protected void EnemySystemOnTriggerEnterFilter(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data) {
+            var ColliderEnemy = EnemyManager[data.ColliderId];
+            if (ColliderEnemy == null) {
+                return;
+            }
+            if (!ColliderEnemy.Enabled) {
+                return;
+            }
+            var SourcePlayer = PlayerManager[data.EntityId];
+            if (SourcePlayer == null) {
+                return;
+            }
+            if (!SourcePlayer.Enabled) {
+                return;
+            }
+            this.EnemySystemOnTriggerEnterHandler(data, ColliderEnemy, SourcePlayer);
         }
     }
     
