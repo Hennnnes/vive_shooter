@@ -34,6 +34,8 @@ namespace ViveDatabase {
         
         private IEcsComponentManagerOf<Player> _PlayerManager;
         
+        private IEcsComponentManagerOf<Menu> _MenuManager;
+        
         public IEcsComponentManagerOf<Wands> WandsManager {
             get {
                 return _WandsManager;
@@ -79,6 +81,15 @@ namespace ViveDatabase {
             }
         }
         
+        public IEcsComponentManagerOf<Menu> MenuManager {
+            get {
+                return _MenuManager;
+            }
+            set {
+                _MenuManager = value;
+            }
+        }
+        
         public override void Setup() {
             base.Setup();
             WandsManager = ComponentSystem.RegisterComponent<Wands>(1);
@@ -86,6 +97,7 @@ namespace ViveDatabase {
             bulletManager = ComponentSystem.RegisterComponent<bullet>(4);
             WandRightManager = ComponentSystem.RegisterComponent<WandRight>(3);
             PlayerManager = ComponentSystem.RegisterComponent<Player>(5);
+            MenuManager = ComponentSystem.RegisterComponent<Menu>(7);
             this.OnEvent<uFrame.Kernel.KernelLoadedEvent>().Subscribe(_=>{ InputSystemKernelLoadedFilter(_); }).DisposeWith(this);
             this.OnEvent<ViveDatabase.ShootEvent>().Subscribe(_=>{ InputSystemShootEventFilter(_); }).DisposeWith(this);
             this.OnEvent<ViveDatabase.TeleportEvent>().Subscribe(_=>{ InputSystemTeleportEventFilter(_); }).DisposeWith(this);

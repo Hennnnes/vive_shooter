@@ -1,8 +1,0 @@
-{
-	"Identifier":"3a00a77f-1824-4812-9a63-db8c458812a1"	, 
-	"Time":"3/10/2017 3:46:07 PM"	, 
-	"Group":15467	, 
-	"DataRecordId":"3f627175-b061-48d9-bdb2-d2c60852f8cb"	, 
-	"Type":0	, 
-	"RecordType":"uFrame.ECS.Editor.HandlerNode, Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
-	"Data":"{\r\n\t\"CodeHandler\":false\t, \r\n\t\"Custom\":false\t, \r\n\t\"MetaType\":\"uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher\"\t, \r\n\t\"VariableCount\":0\t, \r\n\t\"VariableName\":\"HandlerNode3\"\t, \r\n\t\"Name\":\"InputSystemOnTriggerEnter\"\t, \r\n\t\"Order\":0\t, \r\n\t\"GraphId\":\"e3f49127-f1bf-4a8f-8147-d3e497e46059\"\t, \r\n\t\"Identifier\":\"3f627175-b061-48d9-bdb2-d2c60852f8cb\"\t, \r\n\t\"Expanded\":false}\r\n"}
