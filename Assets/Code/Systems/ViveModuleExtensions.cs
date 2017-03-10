@@ -65,6 +65,27 @@ static
         
         #region 
 static
+        public uFrame.ECS.APIs.IEcsComponentManagerOf<Weapon> WeaponManager(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Weapon>();
+        }
+        #endregion
+        
+        #region 
+static
+        public uFrame.ECS.APIs.IEcsComponentManagerOf<EnemySpawner> EnemySpawnerManager(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<EnemySpawner>();
+        }
+        #endregion
+        
+        #region 
+static
+        public uFrame.ECS.APIs.IEcsComponentManagerOf<Enemy> EnemyManager(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Enemy>();
+        }
+        #endregion
+        
+        #region 
+static
         public List<Menu> MenuComponents(this uFrame.ECS.APIs.IEcsSystem system) {
             return system.ComponentSystem.RegisterComponent<Menu>().Components;
         }
@@ -102,6 +123,27 @@ static
 static
         public List<Wands> WandsComponents(this uFrame.ECS.APIs.IEcsSystem system) {
             return system.ComponentSystem.RegisterComponent<Wands>().Components;
+        }
+        #endregion
+        
+        #region 
+static
+        public List<Weapon> WeaponComponents(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Weapon>().Components;
+        }
+        #endregion
+        
+        #region 
+static
+        public List<EnemySpawner> EnemySpawnerComponents(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<EnemySpawner>().Components;
+        }
+        #endregion
+        
+        #region 
+static
+        public List<Enemy> EnemyComponents(this uFrame.ECS.APIs.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Enemy>().Components;
         }
         #endregion
     }

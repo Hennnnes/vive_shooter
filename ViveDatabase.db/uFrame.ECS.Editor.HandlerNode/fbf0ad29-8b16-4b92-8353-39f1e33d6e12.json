@@ -1,0 +1,11 @@
+{
+	"CodeHandler":false	, 
+	"Custom":false	, 
+	"MetaType":"uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher"	, 
+	"VariableCount":0	, 
+	"VariableName":"HandlerNode11"	, 
+	"Name":"EnemySpawnSystemOnTriggerEnterWeapon"	, 
+	"Order":0	, 
+	"GraphId":"e3f49127-f1bf-4a8f-8147-d3e497e46059"	, 
+	"Identifier":"fbf0ad29-8b16-4b92-8353-39f1e33d6e12"	, 
+	"Expanded":false}

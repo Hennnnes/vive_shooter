@@ -14,18 +14,20 @@ namespace ViveDatabase {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using uFrame.ECS.Systems;
-    using uFrame.ECS.UnityUtilities;
-    using uFrame.Kernel;
+    using uFrame.ECS.Components;
+    using uFrame.Json;
+    using UniRx;
+    using UnityEngine;
     
     
-    public partial class ViveDatabaseLoader : uFrame.Kernel.SystemLoader {
+    [uFrame.Attributes.ComponentId(8)]
+    [uFrame.Attributes.uFrameIdentifier("86712a6a-37da-49da-b9d7-7c4440514be8")]
+    public partial class Weapon : uFrame.ECS.Components.EcsComponent {
         
-        public override void Load() {
-            EcsSystem system = null;
-            system = this.AddSystem<InputSystem>();
-            system = this.AddSystem<EnemySpawnSystem>();
-            system = this.AddSystem<EnemySystem>();
+        public override int ComponentId {
+            get {
+                return 8;
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ViveDatabase {
     using ViveDatabase;
     
     
-    public partial class InputSystemBase : uFrame.ECS.Systems.EcsSystem, uFrame.ECS.APIs.ISystemUpdate {
+    public partial class EnemySpawnSystemBase : uFrame.ECS.Systems.EcsSystem, uFrame.ECS.APIs.ISystemFixedUpdate {
         
         private IEcsComponentManagerOf<Wands> _WandsManager;
         
@@ -134,124 +134,106 @@ namespace ViveDatabase {
             WeaponManager = ComponentSystem.RegisterComponent<Weapon>(8);
             WandRightManager = ComponentSystem.RegisterComponent<WandRight>(3);
             PlayerManager = ComponentSystem.RegisterComponent<Player>(5);
-            this.OnEvent<uFrame.Kernel.KernelLoadedEvent>().Subscribe(_=>{ InputSystemKernelLoadedFilter(_); }).DisposeWith(this);
-            this.OnEvent<ViveDatabase.MenuEvent>().Subscribe(_=>{ InputSystemMenuEventFilter(_); }).DisposeWith(this);
-            this.OnEvent<ViveDatabase.ShootEvent>().Subscribe(_=>{ InputSystemShootEventFilter(_); }).DisposeWith(this);
-            this.OnEvent<uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher>().Subscribe(_=>{ InputSystemOnTriggerEnterFilter(_); }).DisposeWith(this);
-            this.OnEvent<ViveDatabase.TeleportEvent>().Subscribe(_=>{ InputSystemTeleportEventFilter(_); }).DisposeWith(this);
+            this.OnEvent<uFrame.Kernel.KernelLoadedEvent>().Subscribe(_=>{ EnemySpawnSystemKernelLoadedFilter(_); }).DisposeWith(this);
+            this.OnEvent<uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher>().Subscribe(_=>{ EnemySpawnSystemOnTriggerEnterFilter(_); }).DisposeWith(this);
+            this.OnEvent<uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher>().Subscribe(_=>{ EnemySpawnSystemOnTriggerEnterWeaponFilter(_); }).DisposeWith(this);
+            this.OnEvent<ViveDatabase.MenuEvent>().Subscribe(_=>{ EnemySpawnSystemMenuEventFilter(_); }).DisposeWith(this);
         }
         
-        protected virtual void InputSystemKernelLoadedHandler(uFrame.Kernel.KernelLoadedEvent data, Wands group) {
+        protected virtual void EnemySpawnSystemKernelLoadedHandler(uFrame.Kernel.KernelLoadedEvent data, EnemySpawner group) {
         }
         
-        protected void InputSystemKernelLoadedFilter(uFrame.Kernel.KernelLoadedEvent data) {
-            var WandsItems = WandsManager.Components;
-            for (var WandsIndex = 0
-            ; WandsIndex < WandsItems.Count; WandsIndex++
+        protected void EnemySpawnSystemKernelLoadedFilter(uFrame.Kernel.KernelLoadedEvent data) {
+            var EnemySpawnerItems = EnemySpawnerManager.Components;
+            for (var EnemySpawnerIndex = 0
+            ; EnemySpawnerIndex < EnemySpawnerItems.Count; EnemySpawnerIndex++
             ) {
-                if (!WandsItems[WandsIndex].Enabled) {
+                if (!EnemySpawnerItems[EnemySpawnerIndex].Enabled) {
                     continue;
                 }
-                this.InputSystemKernelLoadedHandler(data, WandsItems[WandsIndex]);
+                this.EnemySpawnSystemKernelLoadedHandler(data, EnemySpawnerItems[EnemySpawnerIndex]);
             }
         }
         
-        protected virtual void InputSystemUpdateHandler(Wands group) {
+        protected virtual void EnemySpawnSystemOnTriggerEnterHandler(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data, bullet collider, Enemy source) {
         }
         
-        protected void InputSystemUpdateFilter() {
-            var WandsItems = WandsManager.Components;
-            for (var WandsIndex = 0
-            ; WandsIndex < WandsItems.Count; WandsIndex++
-            ) {
-                if (!WandsItems[WandsIndex].Enabled) {
-                    continue;
-                }
-                this.InputSystemUpdateHandler(WandsItems[WandsIndex]);
-            }
-        }
-        
-        public virtual void SystemUpdate() {
-            InputSystemUpdateFilter();
-        }
-        
-        protected virtual void InputSystemMenuEventHandler(ViveDatabase.MenuEvent data, Wands group) {
-        }
-        
-        protected void InputSystemMenuEventFilter(ViveDatabase.MenuEvent data) {
-            var WandsItems = WandsManager.Components;
-            for (var WandsIndex = 0
-            ; WandsIndex < WandsItems.Count; WandsIndex++
-            ) {
-                if (!WandsItems[WandsIndex].Enabled) {
-                    continue;
-                }
-                this.InputSystemMenuEventHandler(data, WandsItems[WandsIndex]);
-            }
-        }
-        
-        protected virtual void InputSystemShootEventHandler(ViveDatabase.ShootEvent data, Wands group) {
-        }
-        
-        protected void InputSystemShootEventFilter(ViveDatabase.ShootEvent data) {
-            var WandsItems = WandsManager.Components;
-            for (var WandsIndex = 0
-            ; WandsIndex < WandsItems.Count; WandsIndex++
-            ) {
-                if (!WandsItems[WandsIndex].Enabled) {
-                    continue;
-                }
-                this.InputSystemShootEventHandler(data, WandsItems[WandsIndex]);
-            }
-        }
-        
-        protected virtual void InputSystemOnTriggerEnterHandler(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data, Menu collider, WandLeft source) {
-        }
-        
-        protected void InputSystemOnTriggerEnterFilter(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data) {
-            var ColliderMenu = MenuManager[data.ColliderId];
-            if (ColliderMenu == null) {
+        protected void EnemySpawnSystemOnTriggerEnterFilter(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data) {
+            var Colliderbullet = bulletManager[data.ColliderId];
+            if (Colliderbullet == null) {
                 return;
             }
-            if (!ColliderMenu.Enabled) {
+            if (!Colliderbullet.Enabled) {
                 return;
             }
-            var SourceWandLeft = WandLeftManager[data.EntityId];
-            if (SourceWandLeft == null) {
+            var SourceEnemy = EnemyManager[data.EntityId];
+            if (SourceEnemy == null) {
                 return;
             }
-            if (!SourceWandLeft.Enabled) {
+            if (!SourceEnemy.Enabled) {
                 return;
             }
-            this.InputSystemOnTriggerEnterHandler(data, ColliderMenu, SourceWandLeft);
+            this.EnemySpawnSystemOnTriggerEnterHandler(data, Colliderbullet, SourceEnemy);
         }
         
-        protected virtual void InputSystemTeleportEventHandler(ViveDatabase.TeleportEvent data, Wands group) {
+        protected virtual void EnemySpawnSystemFixedUpdateHandler(EnemySpawner group) {
         }
         
-        protected void InputSystemTeleportEventFilter(ViveDatabase.TeleportEvent data) {
-            var WandsItems = WandsManager.Components;
-            for (var WandsIndex = 0
-            ; WandsIndex < WandsItems.Count; WandsIndex++
+        protected void EnemySpawnSystemFixedUpdateFilter() {
+            var EnemySpawnerItems = EnemySpawnerManager.Components;
+            for (var EnemySpawnerIndex = 0
+            ; EnemySpawnerIndex < EnemySpawnerItems.Count; EnemySpawnerIndex++
             ) {
-                if (!WandsItems[WandsIndex].Enabled) {
+                if (!EnemySpawnerItems[EnemySpawnerIndex].Enabled) {
                     continue;
                 }
-                this.InputSystemTeleportEventHandler(data, WandsItems[WandsIndex]);
+                this.EnemySpawnSystemFixedUpdateHandler(EnemySpawnerItems[EnemySpawnerIndex]);
             }
+        }
+        
+        public virtual void SystemFixedUpdate() {
+            EnemySpawnSystemFixedUpdateFilter();
+        }
+        
+        protected virtual void EnemySpawnSystemOnTriggerEnterWeaponHandler(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data, Weapon collider, WandRight source) {
+        }
+        
+        protected void EnemySpawnSystemOnTriggerEnterWeaponFilter(uFrame.ECS.UnityUtilities.OnTriggerEnterDispatcher data) {
+            var ColliderWeapon = WeaponManager[data.ColliderId];
+            if (ColliderWeapon == null) {
+                return;
+            }
+            if (!ColliderWeapon.Enabled) {
+                return;
+            }
+            var SourceWandRight = WandRightManager[data.EntityId];
+            if (SourceWandRight == null) {
+                return;
+            }
+            if (!SourceWandRight.Enabled) {
+                return;
+            }
+            this.EnemySpawnSystemOnTriggerEnterWeaponHandler(data, ColliderWeapon, SourceWandRight);
+        }
+        
+        protected virtual void EnemySpawnSystemMenuEventHandler(ViveDatabase.MenuEvent data) {
+        }
+        
+        protected void EnemySpawnSystemMenuEventFilter(ViveDatabase.MenuEvent data) {
+            this.EnemySpawnSystemMenuEventHandler(data);
         }
     }
     
-    [uFrame.Attributes.uFrameIdentifier("78c0d850-4d4f-4de4-a31f-55c314216749")]
-    public partial class InputSystem : InputSystemBase {
+    [uFrame.Attributes.uFrameIdentifier("530a1688-8487-4e7c-aae9-34cbd1caea03")]
+    public partial class EnemySpawnSystem : EnemySpawnSystemBase {
         
-        private static InputSystem _Instance;
+        private static EnemySpawnSystem _Instance;
         
-        public InputSystem() {
+        public EnemySpawnSystem() {
             Instance = this;
         }
         
-        public static InputSystem Instance {
+        public static EnemySpawnSystem Instance {
             get {
                 return _Instance;
             }
