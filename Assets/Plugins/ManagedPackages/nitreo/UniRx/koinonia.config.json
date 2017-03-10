@@ -1,0 +1,8 @@
+{
+  "Title" : "UniRx",
+  "Author" : "neuecc",
+  "Version" : "master",
+  "Mappings" : {
+    "Default" : "Assets/Plugins/UniRx/Scripts"
+  }
+}

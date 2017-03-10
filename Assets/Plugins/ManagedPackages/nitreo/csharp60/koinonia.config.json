@@ -1,0 +1,10 @@
+{
+  "Title" : "Unity C# 6.0 Support",
+  "Author" : "alexzzz",
+  "License" : "MIT",
+  "RequiresFullReimport" : true,
+  "Mappings" : {
+    "Default" : "CSharp60SupportAssets",
+    "Root" : "CSharp60Support"
+  }
+}

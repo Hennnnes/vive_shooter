@@ -1,0 +1,82 @@
+[ 
+	{
+		"Name":"master"		, 
+		"CommitSha":"c11af17d38c1f92358c1150c139d454565f66534"		, 
+		"AuthorName":"nitreo"		, 
+		"RepositoryName":"csharp60"		, 
+		"Type":0		, 
+		"AssociatedDate":"11/25/2016 3:28:19 PM"		, 
+		"ConfigData":		{
+			"License":"MIT"			, 
+			"Mappings":			{
+				"Default":"CSharp60SupportAssets"				, 
+				"Root":"CSharp60Support"			}
+			, 
+			"RequiresFullReimport":true			, 
+			"Dependencies":			{
+			}
+		}
+		, 
+		"Mappings":		{
+			"Default":"Assets/Plugins/ManagedPackages\\nitreo/csharp60"			, 
+			"Root":"CSharp60Support"		}
+		, 
+		"InstallFinalized":true	}
+, 	{
+		"Name":"1.0.0"		, 
+		"CommitSha":"3cc95496de16988a624957fbc0da84fa39a82079"		, 
+		"AuthorName":"uFrame"		, 
+		"RepositoryName":"ECS"		, 
+		"Type":2		, 
+		"AssociatedDate":"7/23/2016 4:32:02 AM"		, 
+		"ConfigData":		{
+			"License":"MIT"			, 
+			"RequiresFullReimport":false			, 
+			"Dependencies":			{
+			}
+		}
+		, 
+		"Mappings":		{
+			"Default":"Assets/Plugins/ManagedPackages\\uFrame/ECS"		}
+		, 
+		"InstallFinalized":true	}
+, 	{
+		"Name":"master"		, 
+		"CommitSha":"40f6805d53b35ff37402df631b82f30a69347c99"		, 
+		"AuthorName":"uFrame"		, 
+		"RepositoryName":"Core"		, 
+		"Type":0		, 
+		"AssociatedDate":"11/25/2016 3:41:52 PM"		, 
+		"ConfigData":		{
+			"License":"MIT"			, 
+			"RequiresFullReimport":false			, 
+			"Dependencies":			{
+			}
+		}
+		, 
+		"Mappings":		{
+			"Default":"Assets/Plugins/ManagedPackages\\uFrame/Core"		}
+		, 
+		"InstallFinalized":true	}
+, 	{
+		"Name":"master"		, 
+		"CommitSha":"a46a11f088237a27265ad2279125f74e7154651c"		, 
+		"AuthorName":"nitreo"		, 
+		"RepositoryName":"UniRx"		, 
+		"Type":0		, 
+		"AssociatedDate":"11/25/2016 3:41:52 PM"		, 
+		"ConfigData":		{
+			"Version":"master"			, 
+			"Mappings":			{
+				"Default":"Assets/Plugins/UniRx/Scripts"			}
+			, 
+			"RequiresFullReimport":false			, 
+			"Dependencies":			{
+			}
+		}
+		, 
+		"Mappings":		{
+			"Default":"Assets/Plugins/ManagedPackages\\nitreo/UniRx"		}
+		, 
+		"InstallFinalized":true	}
+ ]
